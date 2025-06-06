@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, memo } from 'react';
 import type { PageSizeOption } from '../model/ratesSettingsSlice';
 import { RotateCw, ArrowUp, ArrowDown } from 'lucide-react';
 
@@ -68,4 +68,4 @@ const RatesControls: FC<RatesControlsProps> = ({
   );
 };
 
-export default RatesControls;
+export default memo(RatesControls);

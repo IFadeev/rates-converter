@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, memo } from 'react';
 import Decimal from 'decimal.js';
 import type { Rate } from '../types';
 
@@ -36,4 +36,4 @@ const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
   );
 };
 
-export default RateCard;
+export default memo(RateCard);

@@ -1,15 +1,16 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useMemo } from 'react';
 import LogoutButton from '@/features/auth/ui/LogoutButton';
 
 export default function Header() {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
-  const title = location.pathname.startsWith('/convert')
-    ? 'Convert'
-    : location.pathname.startsWith('/rates')
-      ? 'Rates'
-      : '';
+  const title = useMemo(() => {
+    if (pathname.startsWith('/convert')) return 'Convert';
+    if (pathname.startsWith('/rates')) return 'Rates';
+    return '';
+  }, [pathname]);
 
   return (
     <header data-testid="header" className="bg-white shadow-sm w-full fixed top-0 z-10">
