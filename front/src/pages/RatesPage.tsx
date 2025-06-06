@@ -12,7 +12,7 @@ import RatesControls from '@/features/rates/ui/RatesControls';
 import RatesList from '@/features/rates/ui/RatesList';
 import type { Rate } from '@/features/rates/types';
 import Decimal from 'decimal.js';
-import { useGetRatesQuery } from '@/features/rates/api/ratesApi.ts';
+import { useGetRatesQuery } from '@/features/rates/api/ratesApi';
 
 import Spinner from '@/shared/ui/Spinner';
 
@@ -34,9 +34,9 @@ export default function RatesPage() {
     }
   }, [ratesData]);
 
-  const ratesArray: Rate[] = useMemo(() => ratesData ?? [], [ratesData]);
+  const ratesArray = useMemo<Rate[]>(() => ratesData ?? [], [ratesData]);
 
-  const sortedRates = useMemo(() => {
+  const sortedRates = useMemo<Rate[]>(() => {
     if (sortOrder === '') return ratesArray;
     return [...ratesArray].sort((a, b) => {
       const aNum = new Decimal(a.rate);
@@ -47,7 +47,7 @@ export default function RatesPage() {
 
   const totalRates = sortedRates.length;
   const totalPages = Math.max(1, Math.ceil(totalRates / pageSize));
-  const paginatedRates = useMemo(() => {
+  const paginatedRates = useMemo<Rate[]>(() => {
     const startIndex = (currentPage - 1) * pageSize;
     return sortedRates.slice(startIndex, startIndex + pageSize);
   }, [sortedRates, currentPage, pageSize]);
@@ -57,6 +57,28 @@ export default function RatesPage() {
       dispatch(setCurrentPage(1));
     }
   }, [currentPage, totalPages, dispatch]);
+
+  const handleChangePageSize = (size: 10 | 25 | 50 | 100) => {
+    dispatch(setPageSize(size));
+  };
+
+  const handleToggleSort = () => {
+    if (sortOrder === '') dispatch(setSortOrder('asc'));
+    else if (sortOrder === 'asc') dispatch(setSortOrder('desc'));
+    else dispatch(setSortOrder(''));
+  };
+
+  const handleRefresh = () => {
+    refetch();
+  };
+
+  const handlePrevPage = () => {
+    dispatch(setCurrentPage(Math.max(1, currentPage - 1)));
+  };
+
+  const handleNextPage = () => {
+    dispatch(setCurrentPage(Math.min(totalPages, currentPage + 1)));
+  };
 
   if (isLoading) {
     return (
@@ -80,36 +102,32 @@ export default function RatesPage() {
         <RatesControls
           pageSize={pageSize}
           sortOrder={sortOrder}
-          onChangePageSize={(size) => dispatch(setPageSize(size))}
-          onToggleSort={() => {
-            if (sortOrder === '') dispatch(setSortOrder('asc'));
-            else if (sortOrder === 'asc') dispatch(setSortOrder('desc'));
-            else dispatch(setSortOrder(''));
-          }}
-          onRefresh={() => refetch()}
+          onChangePageSize={handleChangePageSize}
+          onToggleSort={handleToggleSort}
+          onRefresh={handleRefresh}
           isRefetching={isFetching}
         />
       </div>
 
-      <RatesList rates={paginatedRates} prevRates={prevRates} />
+      <RatesList rates={paginatedRates} prevRates={prevRates} isLoading={isLoading || isFetching} />
 
       <div className="flex items-center justify-center space-x-4">
         <button
-          onClick={() => dispatch(setCurrentPage(Math.max(1, currentPage - 1)))}
+          onClick={handlePrevPage}
           disabled={currentPage === 1}
           className="px-3 py-1 border rounded disabled:opacity-50"
         >
-          <ArrowLeft size={18} className="inline text-primary" />
+          <ArrowLeft data-testid="prev-page-button" size={18} className="inline text-primary" />
         </button>
         <span>
           Page {currentPage} / {totalPages}
         </span>
         <button
-          onClick={() => dispatch(setCurrentPage(Math.min(totalPages, currentPage + 1)))}
+          onClick={handleNextPage}
           disabled={currentPage === totalPages}
           className="px-3 py-1 border rounded disabled:opacity-50"
         >
-          <ArrowRight size={18} className="inline text-primary" />
+          <ArrowRight data-testid="next-page-button" size={18} className="inline text-primary" />
         </button>
       </div>
     </div>

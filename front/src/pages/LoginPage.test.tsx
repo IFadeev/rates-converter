@@ -5,7 +5,7 @@ import LoginPage from './LoginPage';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
-test('рендерит форму и показывает ошибку при неверных данных', () => {
+test('LoginPage renders the form and shows an error on invalid input', () => {
   render(
     <Provider store={store}>
       <BrowserRouter>

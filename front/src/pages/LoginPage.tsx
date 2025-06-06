@@ -25,7 +25,17 @@ export default function LoginPage() {
     if (isAuthenticated) {
       navigate('/rates', { replace: true });
     }
-  }, [navigate, isAuthenticated]);
+  }, [isAuthenticated, navigate]);
+
+  const isLoading = status === 'loading';
+
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -52,11 +62,11 @@ export default function LoginPage() {
             data-testid="username-input"
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            autoComplete={'username'}
+            onChange={handleUsernameChange}
+            autoComplete="username"
             className="mt-1 block w-full px-3 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="demo"
-            disabled={status === 'loading'}
+            disabled={isLoading}
           />
         </label>
 
@@ -66,11 +76,11 @@ export default function LoginPage() {
             data-testid="password-input"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete={'current-password'}
+            onChange={handlePasswordChange}
+            autoComplete="current-password"
             className="mt-1 block w-full px-3 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="demo"
-            disabled={status === 'loading'}
+            disabled={isLoading}
           />
         </label>
 
@@ -78,9 +88,9 @@ export default function LoginPage() {
           data-testid="login-button"
           type="submit"
           className="w-full py-2 bg-primary text-white rounded-sm hover:bg-primary/90 transition disabled:opacity-50"
-          disabled={status === 'loading'}
+          disabled={isLoading}
         >
-          {status === 'loading' ? 'Loading...' : 'Sign In'}
+          {isLoading ? 'Loading...' : 'Sign In'}
         </button>
       </form>
     </div>

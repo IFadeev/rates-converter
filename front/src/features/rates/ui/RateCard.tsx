@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, memo } from 'react';
 import Decimal from 'decimal.js';
 import type { Rate } from '../types';
 
@@ -28,12 +28,14 @@ const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
         cursor-pointer
       `}
     >
-      <div className="flex justify-between items-center p-4">
-        <span className="font-medium text-gray-800">{rate.code}</span>
+      <div data-testid="rate-card" className="flex justify-between items-center p-4">
+        <span data-testid="rate-code" className="font-medium text-gray-800">
+          {rate.code}
+        </span>
         <span className="font-mono text-gray-700">{formattedRate}</span>
       </div>
     </div>
   );
 };
 
-export default RateCard;
+export default memo(RateCard);

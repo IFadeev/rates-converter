@@ -12,7 +12,7 @@ test.describe('Login flow', () => {
     await page.fill('[data-testid="password-input"]', 'demo');
     await page.click('[data-testid="login-button"]');
 
-    await expect(page).toHaveURL(/.*\/rates/);
+    await page.waitForURL(/.*\/rates/);
     await expect(page.locator('[data-testid="header"]')).toHaveText('Rates');
   });
 
