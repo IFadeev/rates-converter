@@ -98,7 +98,20 @@ export default function RatesPage() {
 
   if (error) {
     return (
-      <div className="bg-red-100 text-red-700 px-4 py-2 rounded">Ошибка при загрузке данных</div>
+      <div className="p-4 space-y-6">
+        <div className="flex items-center justify-between">
+          <RatesControls
+            pageSize={pageSize}
+            sortOrder={sortOrder}
+            onChangePageSize={handleChangePageSize}
+            onToggleSort={handleToggleSort}
+            onRefresh={handleRefresh}
+            isRefetching={isFetching}
+          />
+        </div>
+
+        <div className="bg-red-100 text-red-700 px-4 py-2 rounded">Error loading data</div>
+      </div>
     );
   }
 
