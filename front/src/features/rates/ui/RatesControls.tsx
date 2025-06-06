@@ -25,6 +25,7 @@ const RatesControls: FC<RatesControlsProps> = ({
     <div className="flex items-center justify-between w-full">
       <div className="flex items-center space-x-2">
         <select
+          data-testid="page-size-select"
           value={pageSize}
           onChange={(e) => onChangePageSize(Number(e.target.value) as PageSizeOption)}
           className="h-10 rounded border px-3 py-1 focus:ring-2 focus:ring-primary"
@@ -37,6 +38,7 @@ const RatesControls: FC<RatesControlsProps> = ({
         </select>
 
         <button
+          data-testid="sort-button"
           onClick={onToggleSort}
           className="h-10 w-20 border rounded hover:bg-gray-100 transition flex items-center justify-center space-x-1"
         >

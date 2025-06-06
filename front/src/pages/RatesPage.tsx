@@ -12,7 +12,7 @@ import RatesControls from '@/features/rates/ui/RatesControls';
 import RatesList from '@/features/rates/ui/RatesList';
 import type { Rate } from '@/features/rates/types';
 import Decimal from 'decimal.js';
-import { useGetRatesQuery } from '@/features/rates/api/ratesApi.ts';
+import { useGetRatesQuery } from '@/features/rates/api/ratesApi';
 
 import Spinner from '@/shared/ui/Spinner';
 
@@ -117,7 +117,7 @@ export default function RatesPage() {
           disabled={currentPage === 1}
           className="px-3 py-1 border rounded disabled:opacity-50"
         >
-          <ArrowLeft size={18} className="inline text-primary" />
+          <ArrowLeft data-testid="prev-page-button" size={18} className="inline text-primary" />
         </button>
         <span>
           Page {currentPage} / {totalPages}
@@ -127,7 +127,7 @@ export default function RatesPage() {
           disabled={currentPage === totalPages}
           className="px-3 py-1 border rounded disabled:opacity-50"
         >
-          <ArrowRight size={18} className="inline text-primary" />
+          <ArrowRight data-testid="next-page-button" size={18} className="inline text-primary" />
         </button>
       </div>
     </div>
