@@ -13,7 +13,7 @@ test.describe('Login flow', () => {
     await page.click('[data-testid="login-button"]');
 
     await expect(page).toHaveURL(/.*\/rates/);
-    await expect(page.locator('[data-testid="rates-page"]')).toHaveText('Rates Page');
+    await expect(page.locator('[data-testid="header"]')).toHaveText('Rates');
   });
 
   test('should display error on invalid credentials', async ({ page }) => {
