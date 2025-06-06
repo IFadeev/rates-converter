@@ -50,6 +50,7 @@ export default function LoginPage() {
         <label className="block mb-2">
           <span className="text-gray-700">Login</span>
           <input
+            data-testid="username-input"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -63,6 +64,7 @@ export default function LoginPage() {
         <label className="block mb-4">
           <span className="text-gray-700">Password</span>
           <input
+            data-testid="password-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -74,6 +76,7 @@ export default function LoginPage() {
         </label>
 
         <button
+          data-testid="login-button"
           type="submit"
           className="w-full py-2 bg-primary text-white rounded-sm hover:bg-primary/90 transition disabled:opacity-50"
           disabled={status === 'loading'}

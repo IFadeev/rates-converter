@@ -17,7 +17,7 @@ export default function AppRoutes() {
         path="/rates"
         element={
           <RequireAuth>
-            <div>Rates Page</div>
+            <div data-testid="rates-page">Rates Page</div>
           </RequireAuth>
         }
       />
