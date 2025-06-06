@@ -135,7 +135,6 @@ const config: Config = {
               padding: '16px',
               overflowX: 'auto',
             },
-            // Можно кастомизировать другие элементы при необходимости
           },
         },
         invert: {

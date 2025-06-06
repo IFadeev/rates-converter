@@ -1,4 +1,3 @@
-// src/features/auth/ui/LoginPage.tsx
 import { useState, type FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
