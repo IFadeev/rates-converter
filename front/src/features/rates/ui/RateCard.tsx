@@ -2,6 +2,8 @@ import { type FC, memo, useEffect, useState } from 'react';
 import Decimal from 'decimal.js';
 import type { Rate } from '../types';
 
+import RateChart from './RateChart';
+
 interface RateCardProps {
   rate: Rate;
   prevRate?: Rate;
@@ -12,6 +14,7 @@ const FLASH_DURATION = 1000;
 const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
   const formattedRate = new Decimal(rate.rate).toFixed(18);
   const [flash, setFlash] = useState<'up' | 'down' | ''>('');
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (!prevRate) return;
@@ -41,6 +44,7 @@ const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
         ${flash === 'up' ? 'flash-up' : ''}
         ${flash === 'down' ? 'flash-down' : ''}
       `}
+      onClick={() => setIsOpen((open) => !open)}
     >
       <div className="flex justify-between items-center p-4">
         <span data-testid="rate-code" className="font-medium text-gray-800">
@@ -48,6 +52,12 @@ const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
         </span>
         <span className="font-mono text-gray-700">{formattedRate}</span>
       </div>
+
+      {isOpen && (
+        <div className="p-4 border-t bg-white">
+          <RateChart code={rate.code} rate={rate.rate} />
+        </div>
+      )}
     </div>
   );
 };
