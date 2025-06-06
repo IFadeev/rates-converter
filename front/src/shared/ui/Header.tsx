@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import LogoutButton from '@/features/auth/ui/LogoutButton';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export default function Header() {
           <h1 className="text-xl font-bold cursor-pointer" onClick={() => navigate('/rates')}>
             {title || 'App'}
           </h1>
+          <LogoutButton />
         </div>
       </div>
     </header>
