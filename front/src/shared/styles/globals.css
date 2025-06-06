@@ -6,6 +6,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .flash-up {
+    @apply bg-green-300 transition-colors duration-1000;
+  }
+  .flash-down {
+    @apply bg-red-300   transition-colors duration-1000;
+  }
+}
+
+@keyframes flashGreen {
+  from {
+    background-color: #86efac;
+  }
+  to {
+    background-color: #ffffff;
+  }
+}
+
+@keyframes flashRed {
+  from {
+    background-color: #fca5a5;
+  }
+  to {
+    background-color: #ffffff;
+  }
+}
+
+.flash-up {
+  animation: flashGreen 1s forwards;
+}
+.flash-down {
+  animation: flashRed 1s forwards;
+}
+
 /* Здесь можно добавить свои глобальные переопределения, кастомные шрифты */
 html,
 body {

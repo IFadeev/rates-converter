@@ -24,7 +24,13 @@ export default function RatesPage() {
   const sortOrder = useAppSelector(selectSortOrder);
   const currentPage = useAppSelector(selectCurrentPage);
 
-  const { data: ratesData, isLoading, isFetching, error, refetch } = useGetRatesQuery();
+  const {
+    data: ratesData,
+    isLoading,
+    isFetching,
+    error,
+    refetch,
+  } = useGetRatesQuery(undefined, { pollingInterval: 5_000 });
 
   const [prevRates, setPrevRates] = useState<Rate[]>([]);
 
@@ -109,7 +115,7 @@ export default function RatesPage() {
         />
       </div>
 
-      <RatesList rates={paginatedRates} prevRates={prevRates} isLoading={isLoading || isFetching} />
+      <RatesList rates={paginatedRates} prevRates={prevRates} isLoading={isLoading} />
 
       <div className="flex items-center justify-center space-x-4">
         <button
