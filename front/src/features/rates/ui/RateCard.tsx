@@ -39,7 +39,8 @@ const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
       className={`
         border
         bg-white
-        hover:shadow-md
+        hover:shadow-xl
+        transition-shadow
         cursor-pointer
         ${flash === 'up' ? 'flash-up' : ''}
         ${flash === 'down' ? 'flash-down' : ''}

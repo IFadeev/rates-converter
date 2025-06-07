@@ -4,6 +4,7 @@ import { useAppSelector } from '@/hooks/redux';
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import LoginPage from '@/pages/LoginPage';
 import RatesPage from '@/pages/RatesPage';
+import ConvertPage from '@/pages/ConvertPage';
 import Layout from '@/shared/ui/Layout';
 
 function RequireAuth({ children }: { children: JSX.Element }) {
@@ -24,6 +25,7 @@ export default function AppRoutes() {
         }
       >
         <Route path="/rates" element={<RatesPage />} />
+        <Route path="/convert" element={<ConvertPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />
