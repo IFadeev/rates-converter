@@ -116,7 +116,7 @@ export default function RatesPage() {
   }
 
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 space-y-3">
       <div className="flex items-center justify-between">
         <RatesControls
           pageSize={pageSize}
@@ -128,7 +128,7 @@ export default function RatesPage() {
         />
       </div>
 
-      <RatesList rates={paginatedRates} prevRates={prevRates} isLoading={isLoading} />
+      <RatesList rates={paginatedRates} prevRates={prevRates} />
 
       <div className="flex items-center justify-center space-x-4">
         <button

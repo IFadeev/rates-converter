@@ -2,6 +2,7 @@ import { type FC, useEffect, useState } from 'react';
 import { useGetRatesQuery } from '@/features/rates/api/ratesApi';
 import Decimal from 'decimal.js';
 import { type ConvertResult } from '@/features/convert/types';
+import { calculateConversion } from '@/features/convert/utils/calculateConversion';
 
 import { Repeat } from 'lucide-react';
 
@@ -26,74 +27,20 @@ const ConvertControls: FC = () => {
   const [result, setResult] = useState<ConvertResult | null>(null);
 
   useEffect(() => {
-    if (from === to) {
-      setResult({
-        from,
-        to,
-        amount,
-        rate: '',
-        commission: '',
-        total: '',
-        rawTotal: '',
-        isError: true,
-      });
-      return;
-    }
+    if (!ratesData) return;
 
-    const findRateToUSD = (code: string): Decimal | null => {
-      const found = ratesData ? ratesData.find((r) => r.code === code) : null;
-      return found ? new Decimal(found.rate) : null;
-    };
-
-    const rateFromUSD = findRateToUSD(from);
-    const rateToUSD = findRateToUSD(to);
-
-    if (!rateFromUSD || !rateToUSD) {
-      setResult({
-        from,
-        to,
-        amount,
-        rate: '',
-        commission: '',
-        total: '',
-        rawTotal: '',
-        isError: true,
-      });
-      return;
-    }
-
-    const computedRate = rateFromUSD.div(rateToUSD);
-
-    let decAmount: Decimal;
-    try {
-      decAmount = new Decimal(amount);
-    } catch {
-      decAmount = new Decimal(0);
-    }
-
-    const rawTotal = computedRate.mul(decAmount);
-
-    const commission = rawTotal.mul(new Decimal(0.03));
-
-    let total = rawTotal.plus(commission);
-
-    if (FIAT_CURRENCIES.includes(to)) {
-      total = total.toDecimalPlaces(2, Decimal.ROUND_FLOOR);
-    }
-
-    const rateStr = computedRate.toSignificantDigits(18).toString();
-    const commissionStr = commission.toSignificantDigits(18).toString();
-    const totalStr = total.toString();
+    const conversion = calculateConversion(
+      ratesData.map((r) => ({ code: r.code, rate: r.rate.toString() })),
+      from,
+      to,
+      amount,
+    );
 
     setResult({
       from,
       to,
       amount,
-      rate: rateStr,
-      commission: commissionStr,
-      total: totalStr,
-      rawTotal: rawTotal.toString(),
-      isError: false,
+      ...conversion,
     });
   }, [from, to, amount, ratesData]);
 
@@ -112,6 +59,7 @@ const ConvertControls: FC = () => {
       <label className="block">
         <span className="text-gray-700">From</span>
         <select
+          data-testid="select-from"
           value={from}
           onChange={(e) => setFrom(e.target.value.trim())}
           className="mt-1 block w-full rounded border px-3 py-2 focus:ring-2 focus:ring-primary"
@@ -127,11 +75,12 @@ const ConvertControls: FC = () => {
       <label className="block">
         <span className="text-gray-700">To</span>
         <select
+          data-testid="select-to"
           value={to}
           onChange={(e) => setTo(e.target.value.trim())}
           className="mt-1 block w-full rounded border px-3 py-2 focus:ring-2 focus:ring-primary"
         >
-          {FIAT_CURRENCIES.map((code) => (
+          {allCurrencies.map((code) => (
             <option key={code} value={code}>
               {code}
             </option>
@@ -143,15 +92,21 @@ const ConvertControls: FC = () => {
       <label className="block">
         <span className="text-gray-700">Amount</span>
         <input
+          data-testid="input-amount"
           type="text"
           value={amount}
-          onChange={(e) => setAmount(e.target.value.trim())}
+          onChange={(e) => {
+            const val = e.target.value.trim();
+            if (/^(?:(?:\d+)(?:\.\d*)?|\.\d+)$/.test(val) || val === '') {
+              setAmount(val);
+            }
+          }}
           className="mt-1 block w-full rounded border px-3 py-2 focus:ring-2 focus:ring-primary"
           placeholder="Введите число"
         />
       </label>
 
-      <div className="mt-2 bg-gray-50 p-4 rounded border">
+      <div data-testid="convert-result" className="mt-2 bg-gray-50 p-4 rounded border">
         {result === null ? null : result.isError ? (
           <div className="text-red-600">Unsupported operation or invalid data</div>
         ) : (
