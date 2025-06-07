@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  proxy:
+    build: ./proxy
+    ports:
+      - "3000:3000"
+  front:
+    build:
+      context: ./front
+      args:
+        VITE_API_BASE_URL: http://proxy:3000
+    environment:
+      - VITE_API_BASE_URL=http://proxy:3000
+    ports:
+      - "4173:4173"
+    depends_on:
+      - proxy
