@@ -2,9 +2,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "esModuleInterop": true,
-    "module": "ES2020",
+    "module": "ESNext",
     "target": "ES2020",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "moduleResolution": "node"
   },
-  "include": ["src", "tests"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "jest.setup.ts"]
 }

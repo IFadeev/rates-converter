@@ -10,7 +10,7 @@
 pnpm install
 ```
 
-# Тетсирование
+# Тестирование
 
 ## 1. Unit/Component-тесты (Jest + React Testing Library)
 
@@ -57,7 +57,7 @@ docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
 Полный набор команд для сборки и запуска контейнеров:
 
 ```bash
-docker-compose build
+docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
 docker-compose up
 ```
 

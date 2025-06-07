@@ -23,6 +23,6 @@ test.describe('Login flow', () => {
     await page.fill('[data-testid="password-input"]', 'wrong');
     await page.click('[data-testid="login-button"]');
 
-    await expect(page.locator('text=Неверное имя пользователя или пароль')).toBeVisible();
+    await expect(page.locator('text=Incorrect username or password')).toBeVisible();
   });
 });

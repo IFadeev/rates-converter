@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseUrl } from '@/config';
 import type { Rate } from '../types';
-
-export const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const ratesApi = createApi({
   reducerPath: 'ratesApi',
