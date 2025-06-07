@@ -42,3 +42,10 @@ pnpm exec playwright install
 ```bash
 pnpm test:e2e
 ```
+
+
+### Запуск через Docker
+
+1. Открыть Docker
+Запустить из корни проекта  docker-compose up --build
+
