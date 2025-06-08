@@ -49,3 +49,18 @@ pnpm exec playwright install
 ```bash
 pnpm test:e2e
 ```
+
+
+### Запуск через Docker
+
+`Впервую очередь обязательно нужно запустить Docker`
+
+Фронт будет запущен на `http://localhost:4173`, а прокси API — на `http://localhost:3000`.
+
+Полный набор команд для сборки и запуска контейнеров:
+
+```bash
+docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
+docker-compose up
+```
+
