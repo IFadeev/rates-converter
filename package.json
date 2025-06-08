@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000 && docker-compose up",
+    "test": "cd front && pnpm install && pnpm exec jest --config jest.config.ts",
+    "test:e2e": "cd front && pnpm playwright test --repeat-each=2",
+    "install front": "cd front && pnpm install"
   },
   "lint-staged": {
     "front/src/**/*.{js,jsx,ts,tsx}": [
