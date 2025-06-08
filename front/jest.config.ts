@@ -2,14 +2,16 @@ import type { Config } from 'jest';
 import 'ts-node/register';
 
 const config: Config = {
-  preset: 'ts-jest',
+  preset: 'ts-jest/presets/default-esm',
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   globals: {
     'ts-jest': {
       tsconfig: './tsconfig.test.json',
+      useESM: true,
     },
   },
   transform: {
-    '^.+.tsx?$': ['ts-jest', {}],
+    '^.+.tsx?$': ['ts-jest', { useESM: true }],
   },
   setupFiles: ['<rootDir>/jest.setup.ts'],
   transformIgnorePatterns: ['/node_modules/', `\\.pnp\\.[^\\/]+$`],

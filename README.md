@@ -1,13 +1,20 @@
 # Репозиторий для выполнения тестового задания
 
+# Запуск через Docker
 
-### Перед установкой
-- Пакетный менеджер, который используется - [pnpm](https://pnpm.io/)
+Фронт будет запущен на `http://localhost:4173`, а прокси API — на `http://localhost:3000`.
 
-### Шаги установки
-- Установить зависимости 
-```bash 
-pnpm install
+По умолчанию в `docker-compose.yml` используется переменная окружения `VITE_API_BASE_URL`. При необходимости ее можно переопределить при сборке:
+
+```bash
+docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
+```
+
+Полный набор команд для сборки и запуска контейнеров:
+
+```bash
+docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
+docker-compose up
 ```
 
 # Тестирование
@@ -42,22 +49,3 @@ pnpm exec playwright install
 ```bash
 pnpm test:e2e
 ```
-
-
-### Запуск через Docker
-
-Фронт будет запущен на `http://localhost:4173`, а прокси API — на `http://localhost:3000`.
-
-По умолчанию в `docker-compose.yml` используется переменная окружения `VITE_API_BASE_URL`. При необходимости ее можно переопределить при сборке:
-
-```bash
-docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
-```
-
-Полный набор команд для сборки и запуска контейнеров:
-
-```bash
-docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
-docker-compose up
-```
-

@@ -3,9 +3,10 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "module": "ESNext",
+    "types": ["jest", "node"],
     "target": "ES2020",
     "jsx": "react-jsx",
-    "moduleResolution": "node"
+    "moduleResolution": "nodenext"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "jest.setup.ts"]
 }
