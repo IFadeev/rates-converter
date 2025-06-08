@@ -8,9 +8,9 @@ services:
     build:
       context: ./front
       args:
-        VITE_API_BASE_URL: http://proxy:3000
+        VITE_API_BASE_URL: https://rates-converter.onrender.com/
     environment:
-      - VITE_API_BASE_URL=http://proxy:3000
+      - VITE_API_BASE_URL=https://rates-converter.onrender.com/
     ports:
       - "4173:4173"
     depends_on:
