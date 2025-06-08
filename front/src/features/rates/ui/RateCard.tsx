@@ -3,6 +3,7 @@ import Decimal from 'decimal.js';
 import type { Rate } from '../types';
 
 import RateChart from './RateChart';
+import CurrencyIcon from '@/shared/ui/CurrencyIcon';
 
 interface RateCardProps {
   rate: Rate;
@@ -12,7 +13,7 @@ interface RateCardProps {
 const FLASH_DURATION = 1000;
 
 const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
-  const formattedRate = new Decimal(rate.rate).toFixed(18);
+  const formattedRate = new Decimal(rate.rate).toFixed(16);
   const [flash, setFlash] = useState<'up' | 'down' | ''>('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -48,10 +49,18 @@ const RateCard: FC<RateCardProps> = ({ rate, prevRate }) => {
       onClick={() => setIsOpen((open) => !open)}
     >
       <div className="flex justify-between items-center p-4">
-        <span data-testid="rate-code" className="font-medium text-gray-800">
-          {rate.code}
-        </span>
-        <span className="font-mono text-gray-700">{formattedRate}</span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
+            <CurrencyIcon code={rate.code} />
+            <span data-testid="rate-code" className="font-medium text-gray-800">
+              {rate.code}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-gray-700">{formattedRate}</span>
+        </div>
       </div>
 
       {isOpen && (
