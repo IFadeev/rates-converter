@@ -4,7 +4,10 @@ Live версия: https://rates-converter-0b1o.onrender.com
 
 # Запуск через Docker
 
-Фронт будет запущен на `http://localhost:4173`, а прокси API — на `http://localhost:3000`.
+- Фронт будет запущен на `http://localhost:4173`
+- Прокси API — на `http://localhost:3000`
+
+### Сборку можно запустить из корневой папки через команду `pnpm dev`
 
 По умолчанию в `docker-compose.yml` используется переменная окружения `VITE_API_BASE_URL`. При необходимости ее можно переопределить при сборке:
 
