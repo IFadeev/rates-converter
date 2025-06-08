@@ -24,40 +24,27 @@ docker-compose up
 
 # Тестирование
 
+### Тесты можно запустить из корневой папки через команду `pnpm test` и `pnpm test:e2e`
+
 ## 1. Unit/Component-тесты (Jest + React Testing Library)
 
-### Установка
-```bash
-pnpm install
-pnpm add -D jest ts-jest @types/jest @testing-library/react @testing-library/jest-dom jest-environment-jsdom
-```
-### Запуск
 
+### Запуск
+Тесты можно запустить из корневой папки через команду:
 ```bash
 pnpm test
 ```
 
 ## 2. E2E-тесты (Playwright)
+`Важно:` перед запуском `playwright` тестов необходимо запустить сборку через `pnpm dev`
+
+Тесты можно запустить из корневой папки через команду:
 
 ```bash
-pnpm test
+pnpm pnpm test:e2e
 ```
 ### Конфигурация
 
 - jest.config.ts конфиг для jest тестов
 - playwright.config.ts настроен на запуск тестов из папки tests
 
-### Запуск
-
-- Запустить `jest` тесты можно из корневой папки через команду 
-
-```bash
-cd front && pnpm install && pnpm exec jest --config jest.config.ts
-```
-
-- Запустить `playwright` тесты можно из корневой папки через команду. 
-`Важно:` перед запуском `playwright` тестов необходимо запустить сборку через `pnpm dev`
-
-```bash
-pnpm test:e2e
-```
