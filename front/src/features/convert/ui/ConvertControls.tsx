@@ -23,7 +23,7 @@ const ConvertControls: FC = () => {
   const [to, setTo] = useState<string>(
     FIAT_CURRENCIES.length > 1 ? FIAT_CURRENCIES[0] : FIAT_CURRENCIES[0],
   );
-  const [amount, setAmount] = useState<string>('0.00');
+  const [amount, setAmount] = useState<string>('0');
   const [result, setResult] = useState<ConvertResult | null>(null);
 
   useEffect(() => {
@@ -111,7 +111,10 @@ const ConvertControls: FC = () => {
           <div className="text-red-600">Unsupported operation or invalid data</div>
         ) : (
           <div className="p-6 text-center">
-            <p className="text-2xl font-semibold text-gray-900">1 {result.from}</p>
+            <p className="text-2xl font-semibold text-gray-900">
+              {' '}
+              {result.amount} {result.from}
+            </p>
 
             <div className="my-4">
               <Repeat className="mx-auto text-gray-500" size={22} />

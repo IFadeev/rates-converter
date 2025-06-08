@@ -35,18 +35,20 @@ const RateChart: FC<RateChartProps> = ({ rate }) => {
   }, [rate]);
 
   return (
-    <ResponsiveContainer width="100%" height={200}>
-      <LineChart data={data}>
-        <XAxis dataKey="time" tick={{ fontSize: 12 }} />
-        <YAxis
-          domain={['auto', 'auto']}
-          tickFormatter={(v) => v.toFixed(2)}
-          tick={{ fontSize: 12 }}
-        />
-        <Tooltip formatter={(value: number) => value.toFixed(2)} />
-        <Line type="monotone" dataKey="value" stroke="#3b82f6" dot={false} />
-      </LineChart>
-    </ResponsiveContainer>
+    <div onClick={(e) => e.stopPropagation()}>
+      <ResponsiveContainer width="100%" height={200}>
+        <LineChart data={data}>
+          <XAxis dataKey="time" tick={{ fontSize: 12 }} />
+          <YAxis
+            domain={['auto', 'auto']}
+            tickFormatter={(v) => v.toFixed(2)}
+            tick={{ fontSize: 12 }}
+          />
+          <Tooltip formatter={(value: number) => value.toFixed(2)} />
+          <Line type="monotone" dataKey="value" stroke="#3b82f6" dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
