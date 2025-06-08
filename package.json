@@ -1,29 +1,27 @@
 {
-  "name": "rates-converter",
+  "name": "proxy",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "lint-staged": {
-    "front/src/**/*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix -c front/eslint.config.js front/src"
-    ]
-  },
-  "keywords": [],
-  "author": "",
+  "description": "proxy server for coingate API",
   "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "eslint": "^9.28.0",
-    "husky": "^9.1.7",
-    "prettier": "^3.5.3"
+  "author": "Ivan Fadeev",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
   },
   "dependencies": {
-    "@iconify/react": "^6.0.0"
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.29",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
