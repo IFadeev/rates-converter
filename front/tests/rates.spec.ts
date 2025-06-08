@@ -11,9 +11,6 @@ test.describe('RatesPage flow', () => {
 
   test('should paginate be visible', async ({ page }) => {
     await expect(page.locator('[data-testid="rates-list"]')).toBeVisible();
-  });
-
-  test('should display 10 rate items in the rates list', async ({ page }) => {
     await expect(page.locator('[data-testid="rates-list"] > div')).toHaveCount(10);
   });
 });

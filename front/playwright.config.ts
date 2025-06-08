@@ -5,11 +5,11 @@ export default defineConfig({
   timeout: 30_000,
   webServer: {
     command: 'pnpm dev',
-    url: 'http://localhost:5173',
+    url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
   },
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:4173',
     headless: true,
     viewport: { width: 1280, height: 720 },
     actionTimeout: 5_000,
