@@ -1,63 +1,54 @@
-# Репозиторий для выполнения тестового задания
+# React + TypeScript + Vite
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-### Перед установкой
-- Пакетный менеджер, который используется - [pnpm](https://pnpm.io/)
+Currently, two official plugins are available:
 
-### Шаги установки
-- Установить зависимости 
-```bash 
-pnpm install
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-# Тестирование
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-## 1. Unit/Component-тесты (Jest + React Testing Library)
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-### Установка
-```bash
-pnpm install
-pnpm add -D jest ts-jest @types/jest @testing-library/react @testing-library/jest-dom jest-environment-jsdom
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
 ```
-### Запуск
-
-```bash
-pnpm test
-```
-
-## 2. E2E-тесты (Playwright)
-### Установка
-
-```bash
-pnpm install
-pnpm add -D @playwright/test
-pnpm exec playwright install
-```
-### Конфигурация
-
-- playwright.config.ts настроен на запуск тестов из папки tests
-
-### Запуск
-
-```bash
-pnpm test:e2e
-```
-
-
-### Запуск через Docker
-
-Фронт будет запущен на `http://localhost:4173`, а прокси API — на `http://localhost:3000`.
-
-По умолчанию в `docker-compose.yml` используется переменная окружения `VITE_API_BASE_URL`. При необходимости ее можно переопределить при сборке:
-
-```bash
-docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
-```
-
-Полный набор команд для сборки и запуска контейнеров:
-
-```bash
-docker-compose build --build-arg VITE_API_BASE_URL=http://localhost:3000
-docker-compose up
-```
-
