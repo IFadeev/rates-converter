@@ -3,6 +3,11 @@ import 'ts-node/register';
 
 const config: Config = {
   preset: 'ts-jest',
+  globals: {
+    'ts-jest': {
+      tsconfig: './tsconfig.test.json',
+    },
+  },
   transform: {
     '^.+.tsx?$': ['ts-jest', {}],
   },

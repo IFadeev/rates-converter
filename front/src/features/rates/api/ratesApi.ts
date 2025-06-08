@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseUrl } from '@/config';
 import type { Rate } from '../types';
-
-export const baseUrl = 'http://localhost:3000';
 
 export const ratesApi = createApi({
   reducerPath: 'ratesApi',

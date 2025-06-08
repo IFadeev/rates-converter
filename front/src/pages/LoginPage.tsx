@@ -45,7 +45,7 @@ export default function LoginPage() {
       dispatch(loginSuccess('demo-token'));
       navigate('/rates', { replace: true });
     } else {
-      dispatch(loginFailure('Неверное имя пользователя или пароль'));
+      dispatch(loginFailure('Incorrect username or password'));
     }
   };
 
