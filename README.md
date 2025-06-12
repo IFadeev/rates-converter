@@ -1,6 +1,5 @@
 # Репозиторий для выполнения тестового задания
 
-Live версия: https://rates-converter-0b1o.onrender.com
 
 # Запуск через Docker
 
